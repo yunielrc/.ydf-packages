@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+systemctl --user import-environment PATH
+
+systemctl --user enable --now rclone-home.timer
+
+systemctl --user daemon-reload

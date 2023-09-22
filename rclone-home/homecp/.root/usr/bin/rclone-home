@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#
+# Copy home directories to google drive
+#
+
+set -eu
+
+# guarantee that only one instance of this script is running
+if [[ "${FLOCKER:-}" != "$0" ]]; then
+  exec env FLOCKER="$0" flock -E 3 -en "$0" "$0" "$@"
+fi
+
+# shellcheck source=/dev/null
+if [[ -f ~/.rclone-home.env ]]; then source ~/.rclone-home.env; fi
+
+readonly _RCLONE_HOME_DIRS="${E_RCLONE_HOME_DIRS:-"$RCLONE_HOME_DIRS"}"
+readonly _RCLONE_DRIVE_DIR="${E_RCLONE_DRIVE_DIR:-"$RCLONE_DRIVE_DIR"}"
+# readonly _DRIVE_DIR=Sync/PC/Upload
+
+declare -a _RCLONE_HOME_DIRS_ARR
+IFS=' ' read -ra _RCLONE_HOME_DIRS_ARR <<<"$_RCLONE_HOME_DIRS"
+
+for dir in "${_RCLONE_HOME_DIRS_ARR[@]}"; do
+  rclone -v copy ~/"$dir" "gdrive:${_RCLONE_DRIVE_DIR}/${dir}"
+done
