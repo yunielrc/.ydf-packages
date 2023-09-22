@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+set -eu
+
+# Install
+if [ -n "$(docker ps --all --quiet --filter name=swagger-editor)" ]; then
+  docker rm --force swagger-editor
+fi
+
+docker run \
+  --name swagger-editor \
+  --detach \
+  --restart always \
+  --publish "${SWAGGER_EDITOR_PORT}:8080" \
+  swaggerapi/swagger-editor
