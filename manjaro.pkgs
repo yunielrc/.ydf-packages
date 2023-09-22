@@ -1,0 +1,43 @@
+# shellcheck disable=SC2148
+
+# FILES
+lsd
+bat
+lsof
+nnn
+
+# NETWORK
+bandwhich
+iftop
+nethogs
+
+# DISK
+iotop
+
+# INTERNET
+google-chrome
+
+# MULTIMEDIA
+stremio
+popcorntime-bin
+mpv
+
+# DEVELOPMENT
+git
+insomnia
+postman
+staruml
+swagger-editor
+terraform
+visual-studio-code-bin
+
+# GAMING
+mangohud
+
+# OTHERS
+openrgb
+starship
+rclone-home
+fzf
+navi
+manjaro-gnome-afterinstall
