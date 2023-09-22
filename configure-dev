@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#
+# Configure dev environment
+#
+
+set -eu
+
+sudo pacman -Syu --noconfirm --needed \
+  python-pre-commit \
+  shfmt \
+  shellcheck
+
+# Configure git
+git config core.hooksPath .githooks
