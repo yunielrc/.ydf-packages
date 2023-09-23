@@ -42,7 +42,7 @@ touch ~/.ydf-packages/manjaro-work-pc.pkgs
 touch ~/.ydf-packages/ubuntu-gaming-pc.pkgs
 ```
 
-Add packages to your `packages slelection` files, one per line,
+Add packages to your `packages selection` files, one per line,
 you can add comments using `#` at the beginning of the line.
 
 Save the `packages directory` on your own git repository
