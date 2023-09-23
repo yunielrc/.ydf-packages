@@ -58,5 +58,5 @@ ydf package install <package-name>
 Install all packages from a `packages selection` file
 
 ```sh
-ydf package install <selection.pkgs>
+ydf package install <selection>.pkgs
 ```
