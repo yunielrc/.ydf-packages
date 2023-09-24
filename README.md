@@ -21,10 +21,16 @@ cd && git clone https://github.com/yunielrc/.ydf-packages
 
 ## Configure
 
+Cd to the repository
+
+```sh
+cd ~/.ydf-packages
+```
+
 Open the repository in your preferred code editor
 
 ```sh
-code ~/.ydf-packages
+code .
 ```
 
 Copy the `envsubst.env` from the sample and edit it if you need
@@ -38,8 +44,8 @@ Modify the the `packages` to fit your needs
 Create your `packages selection` files
 
 ```sh
-touch ~/.ydf-packages/manjaro-work-pc.pkgs
-touch ~/.ydf-packages/ubuntu-gaming-pc.pkgs
+touch manjaro-work-pc.pkgs
+touch ubuntu-gaming-pc.pkgs
 ```
 
 Add packages to your `packages selection` files, one per line,
