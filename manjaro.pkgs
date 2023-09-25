@@ -1,6 +1,8 @@
 # shellcheck disable=SC2148
 
-# some tool were take from: https://github.com/ibraheemdev/modern-unix
+# some tool were take from:
+# https://github.com/ibraheemdev/modern-unix
+# https://github.com/ibraheemdev/modern-unix/issues
 
 # FILES
 # A cat clone with syntax highlighting and Git integration.
@@ -68,6 +70,8 @@ terraform
 visual-studio-code-bin
 # A command-line benchmarking tool.
 hyperfine
+# A portable command-line YAML, JSON, XML, CSV, TOML and properties processor
+yq
 
 # GAMING
 mangohud
