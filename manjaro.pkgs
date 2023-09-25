@@ -9,6 +9,8 @@ bat
 # lsd
 # A modern replacement for ls.
 eza
+# A simple, fast and user-friendly alternative to find.
+fd
 lsof
 nnn
 # A more intuitive version of du written in rust.
