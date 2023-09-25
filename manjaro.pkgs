@@ -44,6 +44,8 @@ glances
 google-chrome
 # The power of curl, the ease of use of httpie.
 curlie
+# Friendly and fast tool for sending HTTP requests
+xh
 
 # MULTIMEDIA
 stremio
