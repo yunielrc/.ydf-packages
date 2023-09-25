@@ -42,6 +42,8 @@ glances
 
 # INTERNET
 google-chrome
+# The power of curl, the ease of use of httpie.
+curlie
 
 # MULTIMEDIA
 stremio
