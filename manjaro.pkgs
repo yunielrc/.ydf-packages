@@ -6,6 +6,7 @@ eza
 bat
 lsof
 nnn
+dust
 
 # NETWORK
 bandwhich
@@ -14,6 +15,7 @@ nethogs
 
 # DISK
 iotop
+duf
 
 # INTERNET
 google-chrome
