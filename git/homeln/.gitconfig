@@ -96,8 +96,7 @@ whoami = config user.email
 # Show most recently changed branches first.
 sort = -committerdate
 
-# [core]
-
+[core]
 # Use custom `.gitignore` and `.gitattributes`.
 # excludesfile = ~/.gitignore
 # attributesfile = ~/.gitattributes
@@ -115,7 +114,24 @@ sort = -committerdate
 # https://git-scm.com/docs/git-update-index#_untracked_cache
 # untrackedCache = true
 
-[color]
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+  line-numbers = true
+  side-by-side = true
+
+[merge]
+  conflictstyle = diff3
+
+[diff]
+  colorMoved = default
+
+# [color]
 
 # Use colors in Git commands that are capable of colored output when
 # outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
@@ -144,8 +160,6 @@ ui = auto
 
 # 	# https://help.github.com/articles/signing-commits-using-gpg/
 # 	gpgsign = true
-
-# [diff]
 
 # 	# Detect copies as well as renames.
 # 	renames = copies
