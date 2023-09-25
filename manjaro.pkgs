@@ -1,11 +1,17 @@
 # shellcheck disable=SC2148
 
+# some tool were take from: https://github.com/ibraheemdev/modern-unix
+
 # FILES
-# lsd
-eza
+# A cat clone with syntax highlighting and Git integration.
 bat
+# A modern replacement for ls.
+# lsd
+# A modern replacement for ls.
+eza
 lsof
 nnn
+# A more intuitive version of du written in rust.
 dust
 
 # NETWORK
@@ -15,6 +21,7 @@ nethogs
 
 # DISK
 iotop
+# A better df alternative
 duf
 
 # INTERNET
