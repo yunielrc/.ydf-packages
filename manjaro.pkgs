@@ -24,6 +24,8 @@ iftop
 nethogs
 # ping, but with a graph.
 gping
+# A user-friendly command-line DNS client. dig on steroids
+dog
 
 # DISK
 iotop
