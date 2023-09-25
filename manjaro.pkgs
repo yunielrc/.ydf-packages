@@ -22,6 +22,8 @@ ripgrep
 bandwhich
 iftop
 nethogs
+# ping, but with a graph.
+gping
 
 # DISK
 iotop
