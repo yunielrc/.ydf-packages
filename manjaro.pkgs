@@ -30,6 +30,10 @@ iotop
 # A better df alternative
 duf
 
+# PROCESS
+# A modern replacement for ps.
+procs
+
 # MONITORS
 # Yet another cross-platform graphical process/system monitor.
 bottom
