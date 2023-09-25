@@ -42,6 +42,10 @@ bottom
 # Glances an Eye on your system. A top/htop alternative for GNU/Linux, BSD, Mac OS and Windows operating systems.
 glances
 
+# TEXT EDITORS
+# A post-modern modal text editor.
+helix
+
 # INTERNET
 google-chrome
 # The power of curl, the ease of use of httpie.
