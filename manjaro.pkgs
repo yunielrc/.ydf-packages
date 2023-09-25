@@ -1,7 +1,8 @@
 # shellcheck disable=SC2148
 
 # FILES
-lsd
+# lsd
+eza
 bat
 lsof
 nnn
