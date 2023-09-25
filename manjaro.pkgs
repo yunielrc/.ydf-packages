@@ -50,6 +50,8 @@ staruml
 swagger-editor
 terraform
 visual-studio-code-bin
+# A command-line benchmarking tool.
+hyperfine
 
 # GAMING
 mangohud
