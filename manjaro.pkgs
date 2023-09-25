@@ -28,6 +28,10 @@ iotop
 # A better df alternative
 duf
 
+# MONITORS
+# Yet another cross-platform graphical process/system monitor.
+bottom
+
 # INTERNET
 google-chrome
 
