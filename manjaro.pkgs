@@ -88,6 +88,6 @@ rclone-home
 # A general purpose command-line fuzzy finder.
 fzf
 navi
-manjaro-gnome-afterinstall
+# manjaro-gnome-afterinstall
 # A community effort to simplify man pages with practical examples.
 tldr
