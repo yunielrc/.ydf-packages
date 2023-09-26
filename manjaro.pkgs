@@ -3,6 +3,7 @@
 # some tool were take from:
 # https://github.com/ibraheemdev/modern-unix
 # https://github.com/ibraheemdev/modern-unix/issues
+# https://jvns.ca/blog/2022/04/12/a-list-of-new-ish--command-line-tools/
 
 # FILES
 # A cat clone with syntax highlighting and Git integration.
@@ -45,6 +46,8 @@ bottom
 glances
 # A monitor of resources
 btop
+# Sort of like top or htop but with zoom-able charts, CPU, GPU, network, and disk usage
+zenith
 
 # TEXT EDITORS
 # A post-modern modal text editor.
