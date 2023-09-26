@@ -43,6 +43,8 @@ procs
 bottom
 # Glances an Eye on your system. A top/htop alternative for GNU/Linux, BSD, Mac OS and Windows operating systems.
 glances
+# A monitor of resources
+btop
 
 # TEXT EDITORS
 # A post-modern modal text editor.
