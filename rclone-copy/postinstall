@@ -1,0 +1,2 @@
+# shellcheck disable=SC2148
+systemctl --user enable --now rclone-copy.timer

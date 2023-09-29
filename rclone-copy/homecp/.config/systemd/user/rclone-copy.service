@@ -1,0 +1,7 @@
+[Unit]
+Description=Run rclone-copy
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.root/usr/bin/rclone-copy

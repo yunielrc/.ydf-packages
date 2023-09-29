@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+#
+# Copy directories with rclone
+#
+
+set -eu
+
+# guarantee that only one instance of this script is running
+if [[ "${FLOCKER:-}" != "$0" ]]; then
+  exec env FLOCKER="$0" flock -E 3 -en "$0" "$0" "$@"
+fi
+
+# shellcheck source=/dev/null
+if [[ -f ~/.rclone-copy.env ]]; then source ~/.rclone-copy.env; fi
+
+readonly _RCLONE_SRC_DIRS="${E_RCLONE_SRC_DIRS:-"$RCLONE_SRC_DIRS"}"
+readonly _RCLONE_DEST_DIRS="${E_RCLONE_DEST_DIRS:-"$RCLONE_DEST_DIRS"}"
+# readonly _DRIVE_DIR=Sync/PC/Upload
+
+declare -a _RCLONE_SRC_DIRS_ARR
+IFS=' ' read -ra _RCLONE_SRC_DIRS_ARR <<<"$_RCLONE_SRC_DIRS"
+
+for src_dir in "${_RCLONE_SRC_DIRS_ARR[@]}"; do
+  # e.g.: rclone -v copy /Documents gdrive:Sync/PC/Upload/Documents
+  rclone --create-empty-src-dirs -v copy "$src_dir" "${_RCLONE_DEST_DIRS}/${src_dir##*/}"
+done
