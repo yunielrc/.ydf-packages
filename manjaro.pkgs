@@ -84,7 +84,7 @@ mangohud
 # OTHERS
 openrgb
 starship
-rclone-home
+rclone-copy
 # A general purpose command-line fuzzy finder.
 fzf
 navi

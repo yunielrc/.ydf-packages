@@ -1,0 +1,6 @@
+{
+  "files.associations": {
+    "*.pkgs": "shellscript",
+    "*.env": "shellscript"
+  }
+}

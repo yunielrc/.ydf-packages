@@ -1,9 +1,0 @@
-[Unit]
-Description=Run rclone-home daily
-
-[Timer]
-OnBootSec=15min
-OnUnitActiveSec=1day
-
-[Install]
-WantedBy=timers.target
