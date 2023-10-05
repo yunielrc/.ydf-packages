@@ -66,6 +66,8 @@ popcorntime-bin
 mpv
 
 # DEVELOPMENT
+# A modern JavaScript and TypeScript runtime
+deno
 git
 insomnia
 postman
