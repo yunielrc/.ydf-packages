@@ -2,7 +2,7 @@
 
 <img width=95%  src=".media/ydf-packages.png" alt="ydf-packages">
 
-**_A working environment declared in a simple directory structure_**
+**_My working environment declared in a simple directory structure_**
 
 ## About
 

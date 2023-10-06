@@ -12,6 +12,7 @@ c = commit
 
 # Push
 p = push
+pf = push --force
 
 # Commit all changes.
 ca = !git add --all && git commit --all --verbose
