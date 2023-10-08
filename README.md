@@ -63,7 +63,13 @@ Install one package
 ydf package install <package-name>
 ```
 
-Install all packages from a `packages selection` file
+Install some packages
+
+```sh
+ydf package install <package-name1> <package-name2> ...
+```
+
+Install packages from a `packages selection` file
 
 ```sh
 ydf package install <selection>.pkgs
