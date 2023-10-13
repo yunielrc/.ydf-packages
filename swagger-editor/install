@@ -1,7 +1,3 @@
-#!/usr/bin/env sh
-
-set -eu
-
 # Install
 if [ -n "$(docker ps --all --quiet --filter name=swagger-editor)" ]; then
   docker rm --force swagger-editor
