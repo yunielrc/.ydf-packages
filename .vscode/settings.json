@@ -1,6 +1,9 @@
 {
   "files.associations": {
     "*.pkgs": "shellscript",
-    "*.env": "shellscript"
+    "*.env": "shellscript",
+    "install": "shellscript",
+    "postinstall": "shellscript",
+    "preinstall": "shellscript"
   }
 }
