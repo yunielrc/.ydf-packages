@@ -80,6 +80,9 @@ hyperfine
 # A portable command-line YAML, JSON, XML, CSV, TOML and properties processor
 yq
 
+# BENCHMARKING
+# basemarkgpu
+
 # GAMING
 mangohud
 
