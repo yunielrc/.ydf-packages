@@ -1,0 +1,261 @@
+#!/bin/bash
+# shellcheck disable=SC1090,SC2155
+
+set -eu
+
+if [[ -f ~/.dyli-gen-adds.env ]]; then source ~/.dyli-gen-adds.env; fi
+
+readonly _INPUT_DIR="${E_INPUT_DIR:-"${INPUT_DIR:-}"}"
+readonly _OUTPUT_DIR="${E_OUTPUT_DIR:-"${OUTPUT_DIR:-}"}"
+
+#
+# Handle conditional blocks inside the template
+#
+# Environment:
+#  User defined environment variables in the .env files
+#
+# Parameters:
+#   tpl  string    template file path
+#
+# Output:
+#  Writes the template with the conditional blocks processed to stdout
+#
+# Returns:
+#   0 on success, non-zero on error.
+#
+transform::process_template_conditionals() {
+
+  local -r tpl="$1"
+
+  awk '
+    /^#IF / {
+      var=$2
+      if (ENVIRON[var] == "") skip=1
+      next
+    }
+    /^#ENDIF/ {
+      skip=0
+      next
+    }
+    skip != 1 { print }
+  ' "$tpl"
+}
+
+#
+# Transform many .env files text using a template
+#
+# Parameters:
+#   tpl         string    template file path
+#   s   string    env files path
+#
+# Output:
+#  Writes the the transformed text to stdout
+#
+# Returns:
+#   0 on success, non-zero on error.
+#
+transform::generate_text_file() {
+  local -r tpl_file="$1"
+  shift
+  local -ra s_arr=("$@")
+
+  (
+    set -a
+    source <(cat "${s_arr[@]}")
+    set +a
+
+    transform::process_template_conditionals "$tpl_file" | envsubst
+  )
+}
+
+#
+# Recursively finds all .info files, creates a same-named folder
+# for each, and generates a .gen.txt file inside using the
+# folder’s template and variables from the .info file.
+#
+# Parameters:
+#   input_dir   string
+#   output_dir  string
+#
+# Returns:
+#   0 on success, non-zero on error.
+#
+transform::generate_all_stores_list_adds() {
+  local -r input_dir="$1"
+  local -r output_dir="$2"
+
+  cd "$input_dir"
+
+  shopt -s nullglob
+
+  local product_category_dir
+  for product_category_dir in */; do
+    local product_category="${product_category_dir%/}"
+
+    local list_tpl_file
+    for list_tpl_file in "${input_dir}/${product_category_dir}"*.ltpl; do
+
+      local store_name="${list_tpl_file#*.}"
+      store_name="${store_name%.ltpl}"
+      local store_env_file="${input_dir}/STORE.${store_name}.env"
+
+      # PRODUCT_LIST
+      local product_list=''
+
+      local tpl_file="${list_tpl_file%.ltpl}.tpl"
+
+      local product_env_file
+      for product_env_file in "${input_dir}/${product_category_dir}"*.env; do
+        product_list+="$(transform::generate_text_file "$tpl_file" "$store_env_file" "$product_env_file" | head -1)
+"
+      done
+
+      local text_file_output_dir="${output_dir}/${store_name}/${product_category}"
+      local text_file_name="${product_category,,}-list.txt"
+
+      local output_file="${text_file_output_dir}/${text_file_name}"
+
+      mkdir -p "$text_file_output_dir"
+
+      export PRODUCT_LIST="$(echo "$product_list" | sort -n)"
+      transform::generate_text_file "$list_tpl_file" "$store_env_file" >"$output_file"
+    done
+  done
+
+  shopt -u nullglob
+}
+
+#
+# Recursively finds all .info files, creates a same-named folder
+# for each, and generates a .gen.txt file inside using the
+# folder’s template and variables from the .info file.
+#
+# Parameters:
+#   input_dir   string
+#   output_dir  string
+#
+# Returns:
+#   0 on success, non-zero on error.
+#
+transform::generate_all_stores_adds() {
+  local -r input_dir="$1"
+  local -r output_dir="$2"
+
+  cd "$input_dir"
+
+  shopt -s nullglob
+
+  local product_category_dir
+  for product_category_dir in */; do
+    local product_category="${product_category_dir%/}"
+
+    local tpl_file
+    for tpl_file in "${input_dir}/${product_category_dir}"*.tpl; do
+
+      local store_name="${tpl_file#*.}"
+      store_name="${store_name%.tpl}"
+
+      local product_env_file
+      for product_env_file in "${input_dir}/${product_category_dir}"*.env; do
+
+        local product_name="${product_env_file#*"${product_category,,}-"}"
+        product_name="${product_name%.env}"
+
+        local text_file_output_dir="${output_dir}/${store_name}/${product_category}/${product_name}"
+
+        local text_file_name="${product_env_file##*/}"
+        text_file_name="${text_file_name%*.env}.txt"
+
+        local output_file="${text_file_output_dir}/${text_file_name}"
+        local store_env_file="${input_dir}/STORE.${store_name}.env"
+
+        mkdir -p "$text_file_output_dir"
+
+        transform::generate_text_file "$tpl_file" "$store_env_file" "$product_env_file" >"$output_file"
+      done
+    done
+  done
+
+  shopt -u nullglob
+
+}
+
+transform::generate_img_add() {
+  local -r input_img_file="$1"
+  local -r output_img_file="$2"
+  local -r text="$3"
+
+  magick "$input_img_file" \
+    -gravity center -bordercolor white -border 300 \
+    -resize "960x960^" -extent 960x960 \
+    -fill white -colorize 60% \
+    \( \
+    -background none -size 940x \
+    -define pango:align=left \
+    pango:"<span font='FiraCode Nerd Font Bold 38' foreground='yellow'>${text}</span>" \
+    \( +clone -background black -shadow 300x2+2+2 \) +swap \
+    -background none -layers merge +repage \
+    \) \
+    -gravity northwest -geometry +20+140 -composite \
+    "$output_img_file"
+}
+
+transform::generate_all_stores_img_adds() {
+  local -r input_dir="$1"
+  local -r output_dir="$2"
+
+  cd "$input_dir"
+
+  shopt -s nullglob
+
+  local product_category_dir
+  for product_category_dir in */; do
+    local product_category="${product_category_dir%/}"
+
+    local tpl_file
+    for tpl_file in "${input_dir}/${product_category_dir}"*.itpl; do
+
+      local store_name="${tpl_file#*.}"
+      store_name="${store_name%.itpl}"
+
+      local product_env_file
+      for product_env_file in "${input_dir}/${product_category_dir}"*.env; do
+
+        local img_file="${product_env_file%.env}.jpg"
+
+        if [[ ! -f "$img_file" ]]; then
+          continue
+        fi
+
+        local product_name="${product_env_file#*"${product_category,,}-"}"
+        product_name="${product_name%.env}"
+
+        local img_file_output_dir="${output_dir}/${store_name}/${product_category}/${product_name}"
+
+        local img_file_name="${img_file##*/}"
+
+        local output_file="${img_file_output_dir}/${img_file_name}"
+        local store_env_file="${input_dir}/STORE.${store_name}.env"
+
+        mkdir -p "$img_file_output_dir"
+        local text
+        text="$(transform::generate_text_file "$tpl_file" "$store_env_file" "$product_env_file")"
+        transform::generate_img_add "$img_file" "$output_file" "$text"
+
+      done
+    done
+  done
+
+  shopt -u nullglob
+
+}
+
+transform::main() {
+  transform::generate_all_stores_adds "$_INPUT_DIR" "$_OUTPUT_DIR"
+  transform::generate_all_stores_list_adds "$_INPUT_DIR" "$_OUTPUT_DIR"
+  transform::generate_all_stores_img_adds "$_INPUT_DIR" "$_OUTPUT_DIR"
+}
+
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+  transform::main "$@"
+fi
