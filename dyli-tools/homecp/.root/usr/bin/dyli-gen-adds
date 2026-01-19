@@ -98,6 +98,7 @@ transform::generate_all_stores_list_adds() {
       local store_name="${list_tpl_file#*.}"
       store_name="${store_name%.ltpl}"
       local store_env_file="${input_dir}/STORE.${store_name}.env"
+      local store_fmt_file="${input_dir}/STORE.${store_name}.fmt.env"
 
       # PRODUCT_LIST
       local product_list=''
@@ -106,7 +107,7 @@ transform::generate_all_stores_list_adds() {
 
       local product_env_file
       for product_env_file in "${input_dir}/${product_category_dir}"*.env; do
-        product_list+="$(transform::generate_text_file "$tpl_file" "$store_env_file" "$product_env_file" | head -1)
+        product_list+="$(transform::generate_text_file "$tpl_file" "$store_env_file" "$product_env_file" "$store_fmt_file" | head -1)
 "
       done
 
@@ -168,10 +169,11 @@ transform::generate_all_stores_adds() {
 
         local output_file="${text_file_output_dir}/${text_file_name}"
         local store_env_file="${input_dir}/STORE.${store_name}.env"
+        local store_fmt_file="${input_dir}/STORE.${store_name}.fmt.env"
 
         mkdir -p "$text_file_output_dir"
 
-        transform::generate_text_file "$tpl_file" "$store_env_file" "$product_env_file" >"$output_file"
+        transform::generate_text_file "$tpl_file" "$store_env_file" "$product_env_file" "$store_fmt_file" >"$output_file"
       done
     done
   done
@@ -192,7 +194,7 @@ transform::generate_img_add() {
     \( \
     -background none -size 940x \
     -define pango:align=left \
-    pango:"<span font='FiraCode Nerd Font Bold 38' foreground='yellow'>${text}</span>" \
+    pango:"<span font='FiraCode Nerd Font Bold 42' foreground='yellow'>${text}</span>" \
     \( +clone -background black -shadow 300x2+2+2 \) +swap \
     -background none -layers merge +repage \
     \) \
@@ -236,10 +238,11 @@ transform::generate_all_stores_img_adds() {
 
         local output_file="${img_file_output_dir}/${img_file_name}"
         local store_env_file="${input_dir}/STORE.${store_name}.env"
+        local store_fmt_file="${input_dir}/STORE.${store_name}.fmt.env"
 
         mkdir -p "$img_file_output_dir"
         local text
-        text="$(transform::generate_text_file "$tpl_file" "$store_env_file" "$product_env_file")"
+        text="$(transform::generate_text_file "$tpl_file" "$store_env_file" "$product_env_file" "$store_fmt_file")"
         transform::generate_img_add "$img_file" "$output_file" "$text"
 
       done
