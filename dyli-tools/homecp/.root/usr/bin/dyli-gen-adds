@@ -183,23 +183,30 @@ transform::generate_all_stores_adds() {
 }
 
 transform::generate_img_add() {
-  local -r input_img_file="$1"
-  local -r output_img_file="$2"
-  local -r text="$3"
+  local -r store_env_file="$1"
+  local -r input_img_file="$2"
+  local -r output_img_file="$3"
+  local -r text="$4"
 
-  magick "$input_img_file" \
-    -gravity center -bordercolor white -border 300 \
-    -resize "960x960^" -extent 960x960 \
-    -fill white -colorize 60% \
-    \( \
-    -background none -size 940x \
-    -define pango:align=left \
-    pango:"<span font='FiraCode Nerd Font Bold 42' foreground='yellow'>${text}</span>" \
-    \( +clone -background black -shadow 300x2+2+2 \) +swap \
-    -background none -layers merge +repage \
-    \) \
-    -gravity northwest -geometry +20+140 -composite \
-    "$output_img_file"
+  (
+    set -a
+    source <(cat "$store_env_file")
+    set +a
+
+    magick "$input_img_file" \
+      -gravity center -bordercolor white -border 300 \
+      -resize "960x960^" -extent 960x960 \
+      -fill white -colorize 60% \
+      \( \
+      -background none -size 940x \
+      -define pango:align=left \
+      pango:"<span font='${IMG_FONT:-FiraCode Nerd Font Bold 42}' foreground='${IMG_FONT_COLOR:-yellow}'>${text}</span>" \
+      \( +clone -background black -shadow 300x2+2+2 \) +swap \
+      -background none -layers merge +repage \
+      \) \
+      -gravity northwest -geometry +20+140 -composite \
+      "$output_img_file"
+  )
 }
 
 transform::generate_all_stores_img_adds() {
@@ -243,7 +250,7 @@ transform::generate_all_stores_img_adds() {
         mkdir -p "$img_file_output_dir"
         local text
         text="$(transform::generate_text_file "$tpl_file" "$store_env_file" "$product_env_file" "$store_fmt_file")"
-        transform::generate_img_add "$img_file" "$output_file" "$text"
+        transform::generate_img_add "$store_env_file" "$img_file" "$output_file" "$text"
 
       done
     done
