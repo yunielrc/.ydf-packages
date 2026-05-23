@@ -1,0 +1,20 @@
+# shellcheck disable=SC2148
+
+# DEVELOPMENT
+# A modern JavaScript and TypeScript runtime
+deno
+git
+insomnia
+postman
+staruml
+swagger-editor
+terraform
+visual-studio-code-bin
+# A command-line benchmarking tool.
+hyperfine
+# A portable command-line YAML, JSON, XML, CSV, TOML and properties processor
+yq
+# The power of curl, the ease of use of httpie.
+curlie
+# Friendly and fast tool for sending HTTP requests
+xh

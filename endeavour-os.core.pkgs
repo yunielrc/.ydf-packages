@@ -1,0 +1,83 @@
+# shellcheck disable=SC2148
+
+# some tool were take from:
+# https://github.com/ibraheemdev/modern-unix
+# https://github.com/ibraheemdev/modern-unix/issues
+# https://jvns.ca/blog/2022/04/12/a-list-of-new-ish--command-line-tools/
+
+# FILES
+# A cat clone with syntax highlighting and Git integration.
+bat
+# A modern replacement for ls.
+lsd
+# A modern replacement for ls.
+eza
+# A simple, fast and user-friendly alternative to find.
+fd
+# List open files
+# lsof
+# The unorthodox terminal file manager
+## nnn
+# A more intuitive version of du written in rust.
+dust
+# An extremely fast alternative to grep that respects your gitignore
+ripgrep
+
+# NETWORK
+# display bandwidth usage on an interface by host
+iftop
+# Net top tool grouping bandwidth per process
+# nethogs
+# Group bandwidth per process
+bandwhich
+# Ping, but with a graph.
+# gping
+# A user-friendly command-line DNS client. dig on steroids
+# dog
+
+# DISK
+# simple top-like I/O monitor
+iotop
+# A better df alternative
+duf
+
+# PROCESS
+# A modern replacement for ps.
+## procs
+
+# MONITORS
+# Yet another cross-platform graphical process/system monitor.
+# bottom
+# Glances an Eye on your system. A top/htop alternative for GNU/Linux, BSD, Mac OS and Windows operating systems.
+# glances
+# A monitor of resources
+btop
+# Sort of like top or htop but with zoom-able charts, CPU, GPU, network, and disk usage
+# zenith
+
+# TEXT EDITORS
+# A post-modern modal text editor.
+# helix
+
+# INTERNET
+google-chrome
+
+
+# MULTIMEDIA
+stremio
+popcorntime-bin
+mpv
+
+# BENCHMARKING
+# Basemark GPU
+# basemarkgpu
+
+# OTHERS
+# openrgb
+# starship
+rclone-copy
+# A general purpose command-line fuzzy finder.
+fzf
+navi
+# A community effort to simplify man pages with practical examples.
+tldr

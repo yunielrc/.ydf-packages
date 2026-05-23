@@ -1,0 +1,7 @@
+# shellcheck disable=SC2148
+
+# GAMING
+# A Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more.
+mangohud
+# Valve's digital software delivery system
+steam
